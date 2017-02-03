@@ -11,9 +11,10 @@ if(cap.isOpened() == False):
     g.cameraOffline()
 else:
     while(cap.isOpened()):
-        ret, frame = cap.read()
-        g.cameraOnline()
-        g.process(frame)
+        if (g.filter_contours_output is not 0):
+            ret, frame = cap.read()
+            g.cameraOnline()
+            g.process(frame)
 
 cap.release()
 
