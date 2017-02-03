@@ -15,7 +15,7 @@ class GripPipeline:
     height = []
     ratio = []
 
-    ip = ['roborio-2643-frc.local']
+    ip = 'roborio-2643-frc.local'
     ip2 = 'localhost'
 
     NetworkTable.setIPAddress(ip)
