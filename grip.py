@@ -15,6 +15,8 @@ class GripPipeline:
     height = []
     ratio = []
 
+    status = False
+
     ip = 'roborio-2643-frc.local'
     ip2 = 'localhost'
 
@@ -22,7 +24,10 @@ class GripPipeline:
     NetworkTable.setClientMode()
     NetworkTable.initialize()
     table = NetworkTable.getTable("Vision")
-    
+
+    def cameraStatus(self):
+        return self.table.getBoolean("Camera Call", False)
+
     def __init__(self):
         """initializes all values to presets or None if need to be set
         """
@@ -35,7 +40,7 @@ class GripPipeline:
         self.__hsv_threshold_input = self.blur_output
         self.__hsv_threshold_hue = [0.0, 180.0]
         self.__hsv_threshold_saturation = [0.0, 102.6962457337884]
-        self.__hsv_threshold_value = [255.0, 255.0]
+        self.__hsv_threshold_value = [225.0, 255.0]
 
         self.hsv_threshold_output = None
 
@@ -94,7 +99,7 @@ class GripPipeline:
         self.table.putNumberArray("CenterY", self.centerY)
         self.table.putNumberArray("Width", self.width)
         self.table.putNumberArray("Height", self.height)
-        self.table.putNumberArray("ratio", self.ratio)
+        self.table.putNumberArray("Ratio", self.ratio)
 
     @staticmethod
     def __blur(src, type, radius):
