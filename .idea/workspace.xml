@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="82ca3f8c-e3e3-42b4-af8e-7388470bb5e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grip.py" afterPath="$PROJECT_DIR$/grip.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -390,7 +388,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487526411973</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update with loops and added new values to be sent via networktables&#10;&#10;completed code, may still have bugs... needs more extensive testing">
+      <created>1489543637960</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1489543637960</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -403,7 +408,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="916" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="916" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -452,7 +457,8 @@
     <MESSAGE value="Fixed missing if statement" />
     <MESSAGE value="Using one camera&#10;&#10;Updated so that the serverside (roborio) needs to send data to call the either vision or streaming video. However, program uses 100% cpu of raspberry-pi" />
     <MESSAGE value="Update with a while loop&#10;&#10;completed code, may still have bugs... needs more extensive testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update with a while loop&#10;&#10;completed code, may still have bugs... needs more extensive testing" />
+    <MESSAGE value="Update with loops and added new values to be sent via networktables&#10;&#10;completed code, may still have bugs... needs more extensive testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update with loops and added new values to be sent via networktables&#10;&#10;completed code, may still have bugs... needs more extensive testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
