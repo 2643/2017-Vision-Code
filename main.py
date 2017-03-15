@@ -31,3 +31,5 @@ while (True):
                 calls = vision
             methodCall = getattr(v, calls)
             methodCall()
+    while(g.autoMode() == -1):
+        continue

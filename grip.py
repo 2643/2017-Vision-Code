@@ -44,7 +44,7 @@ class GripPipeline:
     determines auto mode or telop mode from robot java code
     """
     def autoMode(self):
-        return self.table.getNumber("Auto Mode", 1)
+        return self.table.getNumber("Auto Mode", -1)
 
     """
     GRIP CODE INITIALIZING
