@@ -4,6 +4,6 @@ The code for this program was written in Python 3.5 with the help from [GRIP's] 
 as well as using [pynetworktables] (https://github.com/robotpy/pynetworktables) in order to send data to our Roborio's networktable. 
 
 Other dependencies that the code needs are:
-..*OpenCV
-..*Numpy
+..* OpenCV
+..* Numpy
 
