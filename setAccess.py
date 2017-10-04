@@ -3,30 +3,26 @@ from grip import GripPipeline
 import cv2 as cv
 import subprocess
 
-class visionCalls:
-
-    '''
-    Initializing variables
-    '''
+class VisionCalls:
     def __init__(self):
-        self.x = 0
-        self.g = GripPipeline()
-        self.cap = cv.VideoCapture()
-        self.p = None
-        self.once = True
+        self.grip = GripPipeline()
 
-    '''
-    turns on streamer and closes opencv vision
-    '''
+        self.ocv_vision = cv.VideoCapture()
+        self.ocv_vision_on = False
+
+        self.mjpg_process = None
+        self.mjpg_on = False
+
     def stream(self):
-        if(self.once == False):
-            self.cap.release()
-            self.once = True
+        """
+        Turns on streamer and closes opencv vision
+        """
+        if self.ocv_vision_on:
+            self.ocv_vision.release()
+            self.ocv_vision_on = False
 
-        if (self.x == 0):
-            # print("Starting stream")
-            self.x = 1
-            self.p = subprocess.Popen(
+        if !self.mjpg_on:
+            self.mjpg_process = subprocess.Popen(
                 [
                     "mjpg_streamer",
                     "-i",
@@ -35,24 +31,21 @@ class visionCalls:
                     "output_http.so -w ./www -p 1180",
                     "&"
                 ])
+            self.mjpg_on = True
 
-    '''
-    Enables opencv and runs the process
-    '''
     def vision(self):
-        if (self.x == 1):
-            ##print("Ending process")
-            self.p.kill()
+        """
+        Enables opencv and runs the process
+        """
+        if self.mjpg_on:
+            self.mjpg_process.kill()
             time.sleep(2.5)
-            self.x = 0
-            self.once = True
 
-        if(self.once):
-            self.cap.open(0)
-            self.once = False
+            self.mjpg_on = False
+            self.ocv_vision_on = False
 
-        # print("Using vision")
-        ret, frame = self.cap.read()
-        #.cameraOnline()
-        self.g.process(frame)
+        if !self.ocv_vision_on:
+            self.ocv_vision.open(0)
+            self.ocv_vision_on = True
 
+        self.grip.process(self.ocv_vision.read()[1])
