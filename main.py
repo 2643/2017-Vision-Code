@@ -16,16 +16,20 @@ this function uses networktables in order to recieve data and enable autonomous 
 or during teleop vision and mjpeg streamer
 """
 
-while True:
-    while gripp.autoMode() == 1:
-        visionc.vision()
+def main():
+    while True:
+        while gripp.autoMode() == 1:
+            visionc.vision()
 
-    while gripp.autoMode() == 0:
-        if gripp.cameraStatus() != -1:
-            if gripp.cameraStatus() == 0:
-                visionc.stream()
-            elif gripp.cameraStatus() == 1:
-                visionc.vision()
+        while gripp.autoMode() == 0:
+            if gripp.cameraStatus() != -1:
+                if gripp.cameraStatus() == 0:
+                    visionc.stream()
+                elif gripp.cameraStatus() == 1:
+                    visionc.vision()
 
-    while g.autoMode() == -1:
-        pass
+        while g.autoMode() == -1:
+            pass
+
+if __name__ == '__main__':
+    main()

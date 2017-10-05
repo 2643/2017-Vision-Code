@@ -234,59 +234,48 @@ class GripPipeline:
         Returns:
             Contours as a list of numpy.ndarray.
         """
-        output = []
 
-        """More arrays, preparing to return"""
-        centerX = []
-        centerY = []
-        width = []
-        height = []
+        # Arrays to return
+        contours = []
+
+        centerXs = []
+        centerYs = []
+
+        widths = []
+        heights = []
+
         ratios = []
 
         for contour in input_contours:
-            x,y,w,h = cv2.boundingRect(contour)
-            if w < min_width or w > max_width:
-                continue
-            if h < min_height or h > max_height:
-                continue
-            area = cv2.contourArea(contour)
+            x, y, w, h = cv2.boundingRect(contour)
+            if min_width < w < max_width and min_height < h < max_height:
+                area = cv2.contourArea(contour)
 
-            '''
-            calculations
-            '''
-            centerX.insert(1, x + (w / 2))
-            centerY.insert(1, y + (h / 2))
-            width.insert(1, w)
-            height.insert(1, h)
-            ratios.insert(1, h / w)
-            '''
-            Resume code
-            '''
-            if area < min_area:
-                continue
-            if cv2.arcLength(contour, True) < min_perimeter:
-                continue
-            hull = cv2.convexHull(contour)
+                centerXs.insert(1, x + (w / 2))
+                centerYs.insert(1, y + (h / 2))
 
-            if cv2.contourArea(hull) == 0:
-                continue
-            else:
-                solid = 100 * area / cv2.contourArea(hull)
-                if solid < solidity[0] or solid > solidity[1]:
-                    continue
-                if len(contour) < min_vertex_count or len(contour) > max_vertex_count:
-                    continue
-                ratio = (float)(w) / h
+                widths.insert(1, w)
+                heights.insert(1, h)
 
-                '''
-                ratio insert* NOT USED
-                '''
-                #ratios.insert(1, h / w)
+                ratios.insert(1, h / w)
 
-                if ratio < min_ratio or ratio > max_ratio:
-                    continue
-                output.append(contour)
-        return output, centerX, centerY, height, width, ratios
+                hull = cv2.convexHull(contour)
+                hullCA = cv2.contourArea(hull)
+                solid = 100 * area / hullCA
+
+                size_correct = area > min_area and\
+                               cv2.arcLength(contour, True) > min_perimeter and\
+                               hullCA != 0
+                substance_correct = solidity[1] < solid < solidity[0] and\
+                                    len(contour) > min_vertex_count and\
+                                    len(contour) > max_vertex_count
+                if size_correct and substance_correct:
+                    ratio = float(w) / h
+                    #ratio insert* NOT USED
+                    #ratios.insert(1, h / w)
+                    if min_ratio < ratio < max_ratio:
+                        output.append(contour)
+        return contours, centerXs, centerYs, heights, widths, ratios
 
 
 BlurType = Enum('BlurType', 'Box_Blur Gaussian_Blur Median_Filter Bilateral_Filter')
