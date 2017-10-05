@@ -131,7 +131,7 @@ class GripPipeline:
                     tmpHeight.insert(1, self.height[x])
                     '''
         for x in range(len(tmpHeight)):
-            if (tmpHeight[x] > tmpH1):
+            if tmpHeight[x] > tmpH1:
                 tmpH1 = tmpHeight[x]
                 tmpX1 = tmpX[x]
                 xCheck = x
@@ -245,9 +245,9 @@ class GripPipeline:
 
         for contour in input_contours:
             x,y,w,h = cv2.boundingRect(contour)
-            if (w < min_width or w > max_width):
+            if w < min_width or w > max_width:
                 continue
-            if (h < min_height or h > max_height):
+            if h < min_height or h > max_height:
                 continue
             area = cv2.contourArea(contour)
 
@@ -262,9 +262,9 @@ class GripPipeline:
             '''
             Resume code
             '''
-            if (area < min_area):
+            if area < min_area:
                 continue
-            if (cv2.arcLength(contour, True) < min_perimeter):
+            if cv2.arcLength(contour, True) < min_perimeter:
                 continue
             hull = cv2.convexHull(contour)
 
@@ -272,9 +272,9 @@ class GripPipeline:
                 continue
             else:
                 solid = 100 * area / cv2.contourArea(hull)
-                if (solid < solidity[0] or solid > solidity[1]):
+                if solid < solidity[0] or solid > solidity[1]:
                     continue
-                if (len(contour) < min_vertex_count or len(contour) > max_vertex_count):
+                if len(contour) < min_vertex_count or len(contour) > max_vertex_count:
                     continue
                 ratio = (float)(w) / h
 
@@ -283,7 +283,7 @@ class GripPipeline:
                 '''
                 #ratios.insert(1, h / w)
 
-                if (ratio < min_ratio or ratio > max_ratio):
+                if ratio < min_ratio or ratio > max_ratio:
                     continue
                 output.append(contour)
         return output, centerX, centerY, height, width, ratios
